@@ -1,41 +1,75 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
-  <title>Collection API Sample</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/source-code-pro" type="text/css"/>
-  
-  
-      <link rel="stylesheet" href="css/style.css">
-
-  
+  <title>Data Collection API v2 sample</title>
+  <link rel="stylesheet" href="https://vjs.zencdn.net/8.24.2/video-js.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+  <header class="page-header">
+    <h1>Data Collection API v2</h1>
+    <p class="lede">
+      Analytics beacons for a video played outside a Brightcove Player. Every
+      request below goes to <code>metrics.brightcove.com/v2/tracker</code> and
+      is built by <code>js/data-collection.js</code>.
+    </p>
+    <p class="lede lede--muted">
+      Playing these videos writes analytics to account <code>1752604059001</code>.
+      Tick <strong>Dry run</strong> to see the requests without sending them.
+    </p>
+  </header>
 
-  <section class="bcls-section">
-<h2 id="player">The Player</h2>
+  <main>
+    <section class="panel" aria-labelledby="player-heading">
+      <h2 id="player-heading">The player</h2>
+      <p class="video-title">
+        Now playing: <span id="current-video">loading&hellip;</span>
+      </p>
 
-<video id="dataCollector" class="video-js vjs-default-skin" controls="" preload="auto" width="480" height="270" data-setup="{}">&nbsp;</video>
-</section>
+      <div class="player-frame">
+        <video id="player" class="video-js vjs-big-play-centered" controls preload="metadata"
+          playsinline width="960" height="540"></video>
+      </div>
 
-<section class="bcls-section" id="eventLogWrapper"><button class="bcls-button">Change Video</button>
+      <div class="controls">
+        <button id="change-video" type="button" class="button">Change video</button>
+        <label class="toggle">
+          <input id="dry-run" type="checkbox">
+          <span>Dry run</span>
+        </label>
+        <span id="stats" class="stats" aria-live="polite"></span>
+      </div>
+    </section>
 
-<h2 id="eventLogHeader">Event Log</h2>
+    <section class="panel" aria-labelledby="log-heading">
+      <h2 id="log-heading">Event log</h2>
+      <p class="lede lede--muted">
+        Newest first. Each line is the decoded query string of one beacon, in
+        the order the player sent it.
+      </p>
+      <div id="event-log" class="event-log" role="log" aria-live="polite"></div>
+    </section>
+  </main>
 
-<div id="eventLog">&nbsp;</div>
-</section>
-  <script src='http://vjs.zencdn.net/4.5/video.js'></script>
+  <footer class="page-footer">
+    <p>
+      <a href="https://apis.support.brightcove.com/data-collection/getting-started/overview-data-collection-api-v2.html">Data
+        Collection API v2 reference</a>
+      &middot;
+      <a href="https://github.com/BrightcoveLearning/17987-data-collection-api-sample">Source</a>
+    </p>
+    <p class="lede lede--muted">
+      Do not use this with a Brightcove Player or a Brightcove Native SDK: they
+      already send these beacons, and sending more duplicates every view.
+    </p>
+  </footer>
 
-  
-
-    <script  src="js/index.js"></script>
-
-
-
-
+  <script src="https://vjs.zencdn.net/8.24.2/video.min.js"></script>
+  <script type="module" src="js/index.js"></script>
 </body>
 
 </html>
